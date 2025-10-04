@@ -295,7 +295,6 @@ if __name__ == '__main__':
         print("📁 创建 data 目录")
 
     if not os.path.exists('data/novels.json'):
-        # 使用上面提供的完整 novels.json 内容写入
         pass  # 你已有文件，跳过
     else:
         print("📖 已加载现有 novels.json")
@@ -307,4 +306,5 @@ if __name__ == '__main__':
 
     print("✅ 项目启动成功！")
     print("👉 打开浏览器访问：http://127.0.0.1:5000")
+
     app.run(debug=True, host='0.0.0.0', port=5000)
