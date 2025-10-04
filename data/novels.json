@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "title": "斗破苍穹",
+    "author": "天蚕土豆",
+    "genre": "玄幻",
+    "status": "完本",
+    "description": "这里是属于斗气的世界，没有花俏艳丽的魔法，有的，仅仅是繁衍到巅峰的斗气！萧炎从天才沦为废柴，三年之约后逆天崛起。",
+    "cover": "/static/img/dpcq.jpg",
+    "views": 9876543,
+    "votes": 87654,
+    "favorites": 43210,
+    "updateTime": "2025-09-30",
+    "chapters": [
+      {"id": 1, "title": "第一章 天才陨落", "content": "三年之约，今日到期……"},
+      {"id": 2, "title": "第二章 异火现世", "content": "青莲地心火，终于到手……"}
+    ]
+  },
+  {
+    "id": 2,
+    "title": "雪中悍刀行",
+    "author": "烽火戏诸侯",
+    "genre": "武侠",
+    "status": "连载",
+    "description": "北凉王世子徐凤年，为父守国，行走江湖万里，快意恩仇，一柄春秋剑，斩尽天下英雄。",
+    "cover": "/static/img/xzhdx.jpg",
+    "views": 7654321,
+    "votes": 65432,
+    "favorites": 32109,
+    "updateTime": "2025-10-02",
+    "chapters": [
+      {"id": 1, "title": "第一章 北凉风雪", "content": "白马出城，一人一剑走江湖……"},
+      {"id": 2, "title": "第二章 盛大相逢", "content": "李淳罡一剑破甲两千六……"}
+    ]
+  },
+  {
+    "id": 3,
+    "title": "凡人修仙传",
+    "author": "忘语",
+    "genre": "仙侠",
+    "status": "完本",
+    "description": "一个普通山村少年，凭借坚韧意志踏入修仙之路，在尔虞我诈的修真界中步步登顶。",
+    "cover": "/static/img/frxxz.jpg",
+    "views": 8888888,
+    "votes": 77777,
+    "favorites": 55555,
+    "updateTime": "2025-09-28",
+    "chapters": [
+      {"id": 1, "title": "第一章 凡人", "content": "韩立是七玄门中一名普通记名弟子……"}
+    ]
+  },
+  {
+    "id": 4,
+    "title": "诡秘之主",
+    "author": "爱潜水的乌贼",
+    "genre": "奇幻",
+    "status": "完本",
+    "description": "蒸汽与机械的浪潮中，谁能触及非凡？历史迷雾深处，诡异的传说兴起。这是一个诡秘的现代世界。",
+    "cover": "/static/img/gmzz.jpg",
+    "views": 9999999,
+    "votes": 98765,
+    "favorites": 66666,
+    "updateTime": "2025-09-25",
+    "chapters": [
+      {"id": 1, "title": "第一章 小丑", "content": "周明瑞醒来，发现自己成了克莱恩·莫雷蒂……"}
+    ]
+  },
+  {
+    "id": 5,
+    "title": "大奉打更人",
+    "author": "卖报小郎君",
+    "genre": "仙侠",
+    "status": "连载",
+    "description": "万法唯物，科学修仙。一位现代警察穿越异界，成为打更人，以刑侦手段破奇案，笑傲朝堂江湖。",
+    "cover": "/static/img/dfdgr.png",
+    "views": 7777777,
+    "votes": 76543,
+    "favorites": 44444,
+    "updateTime": "2025-10-03",
+    "chapters": [
+      {"id": 1, "title": "第一章 打更人", "content": "许七安从棺材里爬出来……"}
+    ]
+  },
+  {
+    "id": 6,
+    "title": "夜的命名术",
+    "author": "会说话的肘子",
+    "genre": "科幻",
+    "status": "连载",
+    "description": "表里世界交错，赛博朋克与东方修行并存。庆尘在现实与虚幻间穿行，揭开时间的秘密。",
+    "cover": "/static/img/ydmms.jpg",
+    "views": 6666666,
+    "votes": 65432,
+    "favorites": 33333,
+    "updateTime": "2025-10-02",
+    "chapters": [
+      {"id": 1, "title": "第一章 时间囚徒", "content": "庆尘睁开眼，发现自己身处编号监狱……"}
+    ]
+  }
+]

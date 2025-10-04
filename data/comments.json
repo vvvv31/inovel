@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "novel_id": 1,
+    "chapter_id": null,
+    "username": "user1",
+    "content": "斗破苍穹太燃了！三年之约泪目",
+    "timestamp": "2025-10-03 18:00"
+  },
+  {
+    "id": 2,
+    "novel_id": 1,
+    "chapter_id": 1,
+    "username": "user2",
+    "content": "第一章就埋下伏笔，期待后续",
+    "timestamp": "2025-10-03 17:30"
+  },
+  {
+    "id": 3,
+    "novel_id": 2,
+    "chapter_id": null,
+    "username": "user1",
+    "content": "雪中悍刀行文笔绝了",
+    "timestamp": "2025-10-02 20:00"
+  },
+  {
+    "id": 4,
+    "novel_id": 3,
+    "chapter_id": null,
+    "username": "mm",
+    "content": "好看！",
+    "timestamp": "2025-10-03 20:19"
+  },
+  {
+    "id": 5,
+    "novel_id": 4,
+    "chapter_id": 1,
+    "username": "mm",
+    "content": "还不错",
+    "timestamp": "2025-10-03 20:19"
+  }
+]
