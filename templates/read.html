@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{{ novel.title }} - {{ chapter.title }}{% endblock %}
+
+{% block content %}
+<div class="reading">
+  <h2>{{ novel.title }} - {{ chapter.title }}</h2>
+  <div class="content-box">
+    <p>{{ chapter.content }}</p>
+  </div>
+
+  <div class="nav-links">
+    <a href="/detail/{{ novel.id }}" class="btn">◀ 返回目录</a>
+    <!-- 可以后续加“上一章”“下一章” -->
+  </div>
+</div>
+
+<!-- ========== 章节评论区开始 ========== -->
+<div class="comment-section mt-5">
+  <div class="comment-header">本章讨论 (<span id="comment-count">{{ chapter_comments | length }}</span>)</div>
+  <div class="comment-list">
+    {% if chapter_comments %}
+      {% for comment in chapter_comments %}
+        <!-- 确保只显示本章评论 -->
+        {% if comment.chapter_id == chapter.id %}
+        <div class="comment-item">
+          <div class="comment-content">
+            <div class="comment-author">{{ comment.username }}</div>
+            <div class="comment-meta">{{ comment.timestamp }}</div>
+            <div class="comment-text">{{ comment.content }}</div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <div class="p-3 text-muted">本章暂无讨论，快来发表你的看法吧！</div>
+    {% endif %}
+  </div>
+
+  <!-- 评论表单 -->
+  {% if session.logged_in %}
+    <form method="POST" action="/add_comment" class="comment-form">
+      <input type="hidden" name="novel_id" value="{{ novel.id }}">
+      <input type="hidden" name="chapter_id" value="{{ chapter.id }}">
+      <textarea name="content" placeholder="发表对本章的看法..." class="form-control"></textarea>
+      <button type="submit" class="btn btn-primary mt-2">发表评论</button>
+    </form>
+  {% else %}
+    <div class="comment-form">
+      <p class="text-muted text-center mb-0">登录后可发表评论</p>
+    </div>
+  {% endif %}
+</div>
+<!-- ========== 章节评论区结束 ========== -->
+
+<style>
+  .content-box {
+    line-height: 1.8;
+    font-size: 16px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 20px 0;
+  }
+  .nav-links {
+    margin: 20px 0;
+  }
+</style>
+{% endblock %}

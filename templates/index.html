@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <!-- 左侧分类栏 -->
+  <div class="col-md-3">
+    <div class="card mb-4">
+      <div class="card-header bg-danger text-white">
+        <h5 class="mb-0"><i class="fas fa-th-large me-2"></i>作品分类</h5>
+      </div>
+      <div class="card-body p-0">
+        <div class="list-group list-group-flush">
+          {% for genre in ["玄幻", "仙侠", "武侠", "都市", "历史", "游戏", "科幻", "轻小说", "诸天无限"] %}
+          <a href="/category/{{ genre }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            {{ genre }} <span class="badge bg-secondary">{{ [72, 23, 4.5, 37, 7.7, 10, 19, 11, 5.2][loop.index0] }}万</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- 本周强推 - 修复版 -->
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h6 class="mb-0"><i class="fas fa-fire me-2"></i>本周强推</h6>
+      </div>
+      <div class="card-body p-2">
+        <div class="list-group list-group-flush">
+          {% if featured and featured|length > 0 %}
+            {% for novel in featured[:3] %}
+            <a href="/detail/{{ novel.id }}" class="list-group-item list-group-item-action border-0 px-2 py-2 small d-flex align-items-start">
+              <span class="badge bg-danger me-2 flex-shrink-0" style="margin-top: 2px;">{{ loop.index }}</span>
+              <div class="flex-grow-1">
+                <div class="fw-bold text-truncate">{{ novel.title }}</div>
+                <small class="text-muted">{{ novel.author }}</small>
+              </div>
+            </a>
+            {% endfor %}
+          {% else %}
+            <div class="text-center text-muted py-3">
+              <i class="fas fa-book-open fa-2x mb-2"></i>
+              <p class="mb-0">暂无推荐数据</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧主内容区 -->
+  <div class="col-md-9">
+    <!-- 轮播图 -->
+    <div id="mainCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        {% for book in carousel_books %}
+          <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="{{ loop.index0 }}"
+                  class="{% if loop.index0 == 0 %}active{% endif %}"
+                  aria-current="{% if loop.index0 == 0 %}true{% endif %}"
+                  aria-label="Slide {{ loop.index }}"></button>
+        {% endfor %}
+      </div>
+      <div class="carousel-inner rounded">
+        {% for book in carousel_books %}
+          <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+            <img src="{{ book.cover }}"
+                 class="d-block w-100"
+                 alt="{{ book.title }}"
+                 style="height: 300px; object-fit: cover;">
+            <div class="carousel-caption bg-dark bg-opacity-75 text-start p-3 rounded-end">
+              <h4>{{ book.title }}</h4>
+              <p class="mb-1">作者：{{ book.author }} | 阅读量：{{ "{:,}".format(book.views) }} 次</p>
+              <a href="/detail/{{ book.id }}" class="btn btn-danger btn-sm mt-2">立即阅读</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <!-- 人气推荐 -->
+    <div class="card mb-4">
+      <div class="card-header bg-warning text-dark">
+        <h5 class="mb-0"><i class="fas fa-fire me-2"></i>人气推荐</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {% for novel in featured %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+              <div class="card h-100 novel-card">
+                <img src="{{ novel.cover }}" class="card-img-top" alt="{{ novel.title }}"
+                     style="height: 180px; object-fit: cover;">
+                <div class="card-body">
+                  <h6 class="card-title text-truncate">{{ novel.title }}</h6>
+                  <p class="card-text small text-muted mb-1">作者：{{ novel.author }}</p>
+                  <p class="card-text small text-muted">人气：{{ "{:,}".format(novel.views) }}</p>
+                  <a href="/detail/{{ novel.id }}" class="btn btn-danger btn-sm w-100">查看详情</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- 新书速递 -->
+    <div class="card mb-4">
+      <div class="card-header bg-success text-white">
+        <h5 class="mb-0"><i class="fas fa-rocket me-2"></i>新书速递</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {% for novel in new_books %}
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+              <div class="text-center">
+                <img src="{{ novel.cover }}" class="img-fluid rounded mb-2" alt="{{ novel.title }}"
+                     style="height: 120px; width: 90px; object-fit: cover;">
+                <h6 class="small novel-title">{{ novel.title }}</h6>
+                <p class="text-muted x-small">更新：{{ novel.updateTime }}</p>
+                <a href="/detail/{{ novel.id }}" class="btn btn-outline-primary btn-sm">开始阅读</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- 完结精品 -->
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        <h5 class="mb-0"><i class="fas fa-crown me-2"></i>完结精品</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {% for novel in finished %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+              <div class="card h-100">
+                <img src="{{ novel.cover }}" class="card-img-top" alt="{{ novel.title }}"
+                     style="height: 180px; object-fit: cover;">
+                <div class="card-body">
+                  <h6 class="card-title text-truncate">{{ novel.title }}</h6>
+                  <p class="card-text small text-muted">作者：{{ novel.author }}</p>
+                  <a href="/detail/{{ novel.id }}" class="btn btn-success btn-sm w-100">全文阅读</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.novel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.novel-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 2.4em;
+  line-height: 1.2em;
+}
+
+.x-small {
+  font-size: 0.75rem;
+}
+
+.carousel-caption {
+  left: 0;
+  right: auto;
+  bottom: 0;
+  top: 0;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 本周强推项目样式 */
+.list-group-item:hover {
+  background-color: #f8f9fa;
+  transform: translateX(5px);
+  transition: all 0.3s ease;
+}
+</style>
+{% endblock %}

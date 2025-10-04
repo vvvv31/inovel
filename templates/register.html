@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}iNovel - 注册账号{% endblock %}
+
+{% block content %}
+<h2>📝 注册新用户</h2>
+
+<form method="post" action="/register">
+  <div style="margin: 10px 0;">
+    <label>用户名：</label>
+    <input type="text" name="username" required style="padding: 8px; width: 200px;">
+  </div>
+  <div style="margin: 10px 0;">
+    <label>密码：</label>
+    <input type="password" name="password" required style="padding: 8px; width: 200px;">
+  </div>
+  <button type="submit" class="btn">注册</button>
+</form>
+
+<p>已有账号？<a href="/login">去登录</a></p>
+
+<style>
+  form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+</style>
+{% endblock %}

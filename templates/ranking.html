@@ -1,0 +1,135 @@
+<!-- templates/ranking.html -->
+{% extends "base.html" %}
+{% block title %}iNovel - 热门排行榜{% endblock %}
+{% block content %}
+
+<main class="ranking-page">
+  <h1 class="page-title">🏆 热门小说排行榜</h1>
+  <p class="desc">根据多种维度统计，实时更新热门榜单</p>
+
+  <!-- 阅读人气榜 -->
+  <section class="rank-section">
+    <h2 class="section-title">🔥 阅读人气榜</h2>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>封面</th>
+          <th>书名</th>
+          <th>作者</th>
+          <th>类型</th>
+          <th>阅读量</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for novel in view_rank %}
+        <tr>
+          <td class="rank">{{ loop.index }}</td>
+          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
+          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
+          <td>{{ novel.author }}</td>
+          <td>{{ novel.genre }}</td>
+          <td>{{ "{:,}".format(novel.views) }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 月票榜 -->
+  <section class="rank-section">
+    <h2 class="section-title">🗳️ 读者月票榜</h2>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>封面</th>
+          <th>书名</th>
+          <th>作者</th>
+          <th>类型</th>
+          <th>月票数</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for novel in vote_rank %}
+        <tr>
+          <td class="rank">{{ loop.index }}</td>
+          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
+          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
+          <td>{{ novel.author }}</td>
+          <td>{{ novel.genre }}</td>
+          <td>{{ "{:,}".format(novel.votes) }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 收藏榜 -->
+  <section class="rank-section">
+    <h2 class="section-title">❤️ 用户收藏榜</h2>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>封面</th>
+          <th>书名</th>
+          <th>作者</th>
+          <th>类型</th>
+          <th>收藏数</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for novel in fav_rank %}
+        <tr>
+          <td class="rank">{{ loop.index }}</td>
+          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
+          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
+          <td>{{ novel.author }}</td>
+          <td>{{ novel.genre }}</td>
+          <td>{{ "{:,}".format(novel.favorites) }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 新书榜 -->
+  <section class="rank-section">
+    <h2 class="section-title">🆕 新书速递榜</h2>
+    <table class="rank-table">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>封面</th>
+          <th>书名</th>
+          <th>作者</th>
+          <th>类型</th>
+          <th>更新时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for novel in new_rank %}
+        <tr>
+          <td class="rank">{{ loop.index }}</td>
+          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
+          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
+          <td>{{ novel.author }}</td>
+          <td>{{ novel.genre }}</td>
+          <td>{{ novel.updateTime }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</main>
+
+{% endblock %}

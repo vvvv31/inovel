@@ -1,0 +1,84 @@
+<!-- templates/profile.html -->
+{% extends "base.html" %}
+
+{% block title %}个人中心 - iNovel{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 40px auto; padding: 20px; font-family: Arial, sans-serif;">
+  <h1><i class="fas fa-user"></i> 个人中心</h1>
+  <p><strong>欢迎：</strong>{{ username }}</p>
+
+  <!-- 我的收藏 -->
+  <h3><i class="fas fa-heart"></i> 我的收藏</h3>
+  {% if favorite_novels %}
+    <ul style="list-style: none; padding: 0;">
+      {% for novel in favorite_novels %}
+        <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee;">
+          <a href="/detail/{{ novel.id }}" style="text-decoration: none; color: #0066cc;">
+            <img src="{{ novel.cover }}" alt="封面" style="width: 50px; height: 70px; object-fit: cover; margin-right: 10px; vertical-align: middle;">
+            {{ novel.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>暂无收藏</p>
+  {% endif %}
+
+  <!-- 继续阅读 -->
+  <h3><i class="fas fa-book-reader"></i> 继续阅读</h3>
+  {% if recent_novels %}
+    <ul style="list-style: none; padding: 0;">
+      {% for novel in recent_novels %}
+        <li style="margin: 10px 0; padding: 10px; border-bottom: 1px solid #eee;">
+          <a href="/read/{{ novel.id }}/1" style="text-decoration: none; color: #0066cc;">
+            <img src="{{ novel.cover }}" alt="封面" style="width: 50px; height: 70px; object-fit: cover; margin-right: 10px; vertical-align: middle;">
+            {{ novel.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>暂无阅读记录</p>
+  {% endif %}
+
+  <!-- ========== 我的评论 ========== -->
+  <h3><i class="fas fa-comments"></i> 我的评论</h3>
+  {% if user_comments %}
+    <ul style="list-style: none; padding: 0;">
+      {% for comment in user_comments %}
+        <li style="margin: 15px 0; padding: 12px; border: 1px solid #e0e0e0; border-radius: 8px; background: #f9f9f9;">
+          <!-- 评论标题行 -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <a href="/detail/{{ comment.novel_id }}"
+               style="font-weight: bold; color: #0066cc; text-decoration: none; font-size: 1.05rem;">
+              📚 {{ comment.novel_title }}
+            </a>
+            <span style="font-size: 0.85rem; color: #666;">
+              {% if comment.chapter_id %}
+                第 {{ comment.chapter_id }} 章
+              {% else %}
+                小说整体
+              {% endif %}
+            </span>
+          </div>
+
+          <!-- 评论内容 -->
+          <p style="margin: 8px 0; font-size: 0.95rem; color: #333; line-height: 1.5;">
+            {{ comment.content }}
+          </p>
+
+          <!-- 评论时间 -->
+          <small style="color: #999; font-size: 0.85rem;">
+            {{ comment.timestamp }}
+          </small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>暂无评论</p>
+  {% endif %}
+  <!-- ========== 我的评论结束 ========== -->
+
+</div>
+{% endblock %}

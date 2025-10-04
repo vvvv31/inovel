@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}小说分类 - iNovel{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3">
+    <!-- 左侧分类导航（与首页一致） -->
+    <div class="card mb-4">
+      <div class="card-header bg-danger text-white">
+        <h5 class="mb-0"><i class="fas fa-th-large me-2"></i>作品分类</h5>
+      </div>
+      <div class="card-body p-0">
+        <div class="list-group list-group-flush">
+          <a href="/category/玄幻" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            玄幻 <span class="badge bg-secondary">72万</span>
+          </a>
+          <a href="/category/仙侠" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            仙侠 <span class="badge bg-secondary">23万</span>
+          </a>
+          <a href="/category/武侠" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            武侠 <span class="badge bg-secondary">4.5万</span>
+          </a>
+          <a href="/category/都市" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            都市 <span class="badge bg-secondary">37万</span>
+          </a>
+          <a href="/category/历史" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            历史 <span class="badge bg-secondary">7.7万</span>
+          </a>
+          <a href="/category/游戏" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            游戏 <span class="badge bg-secondary">10万</span>
+          </a>
+          <a href="/category/科幻" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            科幻 <span class="badge bg-secondary">19万</span>
+          </a>
+          <a href="/category/轻小说" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            轻小说 <span class="badge bg-secondary">11万</span>
+          </a>
+          <a href="/category/诸天无限" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+            诸天无限 <span class="badge bg-secondary">5.2万</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fas fa-th-large me-2"></i> 小说分类</h4>
+      </div>
+      <div class="card-body">
+        <p class="text-muted mb-4">选择你喜欢的类型，发现更多精彩小说</p>
+
+        <div class="row g-3">
+          {% for genre in genres %}
+            <div class="col-xl-3 col-lg-4 col-md-6">
+              <a href="/category/{{ genre }}" class="text-decoration-none">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                  <div class="card-body text-center">
+                    <i class="fas fa-book fa-2x text-primary mb-3"></i>
+                    <h5 class="card-title">{{ genre }}</h5>
+                    <p class="text-muted small">探索{{ genre }}类小说</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.hover-card {
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #fff, #f8f9fa);
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.hover-card:hover .card-title,
+.hover-card:hover .text-muted {
+  color: white !important;
+}
+</style>
+{% endblock %}
