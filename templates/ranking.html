@@ -1,135 +1,335 @@
-<!-- templates/ranking.html -->
 {% extends "base.html" %}
 {% block title %}iNovel - 热门排行榜{% endblock %}
 {% block content %}
 
-<main class="ranking-page">
-  <h1 class="page-title">🏆 热门小说排行榜</h1>
-  <p class="desc">根据多种维度统计，实时更新热门榜单</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex align-items-center mb-4">
+        <h1 class="page-title mb-0">🏆 热门小说排行榜</h1>
+        <span class="badge bg-danger ms-3">实时更新</span>
+      </div>
+      <p class="text-muted mb-5">根据多种维度统计，为您推荐最受欢迎的小说作品</p>
+    </div>
+  </div>
 
   <!-- 阅读人气榜 -->
-  <section class="rank-section">
-    <h2 class="section-title">🔥 阅读人气榜</h2>
-    <table class="rank-table">
-      <thead>
-        <tr>
-          <th>排名</th>
-          <th>封面</th>
-          <th>书名</th>
-          <th>作者</th>
-          <th>类型</th>
-          <th>阅读量</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for novel in view_rank %}
-        <tr>
-          <td class="rank">{{ loop.index }}</td>
-          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
-          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
-          <td>{{ novel.author }}</td>
-          <td>{{ novel.genre }}</td>
-          <td>{{ "{:,}".format(novel.views) }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-danger text-white py-3">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-fire me-2"></i>🔥 阅读人气榜
+            <small class="fs-6 opacity-75 ms-2">按阅读量排序</small>
+          </h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th width="80" class="text-center">排名</th>
+                  <th width="100" class="text-center">封面</th>
+                  <th>书名</th>
+                  <th width="120">作者</th>
+                  <th width="100" class="text-center">类型</th>
+                  <th width="120" class="text-center">阅读量</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for novel in view_rank %}
+                <tr class="align-middle">
+                  <td class="text-center">
+                    <span class="badge {% if loop.index <= 3 %}bg-danger{% else %}bg-secondary{% endif %} fs-6">
+                      {{ loop.index }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <img src="{{ novel.cover }}" alt="{{ novel.title }}"
+                         class="rounded" style="width: 60px; height: 80px; object-fit: cover;">
+                  </td>
+                  <td>
+                    <a href="/detail/{{ novel.id }}" class="text-decoration-none fw-bold text-dark">
+                      {{ novel.title }}
+                    </a>
+                  </td>
+                  <td class="text-muted">{{ novel.author }}</td>
+                  <td class="text-center">
+                    <span class="badge bg-light text-dark">{{ novel.genre }}</span>
+                  </td>
+                  <td class="text-center text-danger fw-bold">
+                    {{ "{:,}".format(novel.views) }}
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="6" class="text-center py-4 text-muted">
+                    <i class="fas fa-book-open fa-2x mb-2"></i>
+                    <p class="mb-0">暂无数据</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- 月票榜 -->
-  <section class="rank-section">
-    <h2 class="section-title">🗳️ 读者月票榜</h2>
-    <table class="rank-table">
-      <thead>
-        <tr>
-          <th>排名</th>
-          <th>封面</th>
-          <th>书名</th>
-          <th>作者</th>
-          <th>类型</th>
-          <th>月票数</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for novel in vote_rank %}
-        <tr>
-          <td class="rank">{{ loop.index }}</td>
-          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
-          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
-          <td>{{ novel.author }}</td>
-          <td>{{ novel.genre }}</td>
-          <td>{{ "{:,}".format(novel.votes) }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-warning text-dark py-3">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-vote-yea me-2"></i>🗳️ 读者月票榜
+            <small class="fs-6 opacity-75 ms-2">按月票数排序</small>
+          </h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th width="80" class="text-center">排名</th>
+                  <th width="100" class="text-center">封面</th>
+                  <th>书名</th>
+                  <th width="120">作者</th>
+                  <th width="100" class="text-center">类型</th>
+                  <th width="120" class="text-center">月票数</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for novel in vote_rank %}
+                <tr class="align-middle">
+                  <td class="text-center">
+                    <span class="badge {% if loop.index <= 3 %}bg-warning{% else %}bg-secondary{% endif %} fs-6">
+                      {{ loop.index }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <img src="{{ novel.cover }}" alt="{{ novel.title }}"
+                         class="rounded" style="width: 60px; height: 80px; object-fit: cover;">
+                  </td>
+                  <td>
+                    <a href="/detail/{{ novel.id }}" class="text-decoration-none fw-bold text-dark">
+                      {{ novel.title }}
+                    </a>
+                  </td>
+                  <td class="text-muted">{{ novel.author }}</td>
+                  <td class="text-center">
+                    <span class="badge bg-light text-dark">{{ novel.genre }}</span>
+                  </td>
+                  <td class="text-center text-warning fw-bold">
+                    {{ "{:,}".format(novel.votes) }}
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="6" class="text-center py-4 text-muted">
+                    <i class="fas fa-book-open fa-2x mb-2"></i>
+                    <p class="mb-0">暂无数据</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- 收藏榜 -->
-  <section class="rank-section">
-    <h2 class="section-title">❤️ 用户收藏榜</h2>
-    <table class="rank-table">
-      <thead>
-        <tr>
-          <th>排名</th>
-          <th>封面</th>
-          <th>书名</th>
-          <th>作者</th>
-          <th>类型</th>
-          <th>收藏数</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for novel in fav_rank %}
-        <tr>
-          <td class="rank">{{ loop.index }}</td>
-          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
-          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
-          <td>{{ novel.author }}</td>
-          <td>{{ novel.genre }}</td>
-          <td>{{ "{:,}".format(novel.favorites) }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-success text-white py-3">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-heart me-2"></i>❤️ 用户收藏榜
+            <small class="fs-6 opacity-75 ms-2">按收藏数排序</small>
+          </h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th width="80" class="text-center">排名</th>
+                  <th width="100" class="text-center">封面</th>
+                  <th>书名</th>
+                  <th width="120">作者</th>
+                  <th width="100" class="text-center">类型</th>
+                  <th width="120" class="text-center">收藏数</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for novel in fav_rank %}
+                <tr class="align-middle">
+                  <td class="text-center">
+                    <span class="badge {% if loop.index <= 3 %}bg-success{% else %}bg-secondary{% endif %} fs-6">
+                      {{ loop.index }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <img src="{{ novel.cover }}" alt="{{ novel.title }}"
+                         class="rounded" style="width: 60px; height: 80px; object-fit: cover;">
+                  </td>
+                  <td>
+                    <a href="/detail/{{ novel.id }}" class="text-decoration-none fw-bold text-dark">
+                      {{ novel.title }}
+                    </a>
+                  </td>
+                  <td class="text-muted">{{ novel.author }}</td>
+                  <td class="text-center">
+                    <span class="badge bg-light text-dark">{{ novel.genre }}</span>
+                  </td>
+                  <td class="text-center text-success fw-bold">
+                    {{ "{:,}".format(novel.favorites) }}
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="6" class="text-center py-4 text-muted">
+                    <i class="fas fa-book-open fa-2x mb-2"></i>
+                    <p class="mb-0">暂无数据</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- 新书榜 -->
-  <section class="rank-section">
-    <h2 class="section-title">🆕 新书速递榜</h2>
-    <table class="rank-table">
-      <thead>
-        <tr>
-          <th>排名</th>
-          <th>封面</th>
-          <th>书名</th>
-          <th>作者</th>
-          <th>类型</th>
-          <th>更新时间</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for novel in new_rank %}
-        <tr>
-          <td class="rank">{{ loop.index }}</td>
-          <td><img src="{{ novel.cover }}" alt="{{ novel.title }}" class="cover-sm"></td>
-          <td><a href="/detail/{{ novel.id }}" class="book-link">{{ novel.title }}</a></td>
-          <td>{{ novel.author }}</td>
-          <td>{{ novel.genre }}</td>
-          <td>{{ novel.updateTime }}</td>
-        </tr>
-        {% else %}
-        <tr><td colspan="6" class="no-data">暂无数据</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
-</main>
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-info text-white py-3">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-rocket me-2"></i>🆕 新书速递榜
+            <small class="fs-6 opacity-75 ms-2">按更新时间排序</small>
+          </h3>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th width="80" class="text-center">排名</th>
+                  <th width="100" class="text-center">封面</th>
+                  <th>书名</th>
+                  <th width="120">作者</th>
+                  <th width="100" class="text-center">类型</th>
+                  <th width="120" class="text-center">更新时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for novel in new_rank %}
+                <tr class="align-middle">
+                  <td class="text-center">
+                    <span class="badge {% if loop.index <= 3 %}bg-info{% else %}bg-secondary{% endif %} fs-6">
+                      {{ loop.index }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <img src="{{ novel.cover }}" alt="{{ novel.title }}"
+                         class="rounded" style="width: 60px; height: 80px; object-fit: cover;">
+                  </td>
+                  <td>
+                    <a href="/detail/{{ novel.id }}" class="text-decoration-none fw-bold text-dark">
+                      {{ novel.title }}
+                    </a>
+                  </td>
+                  <td class="text-muted">{{ novel.author }}</td>
+                  <td class="text-center">
+                    <span class="badge bg-light text-dark">{{ novel.genre }}</span>
+                  </td>
+                  <td class="text-center text-info fw-bold">
+                    {{ novel.updateTime }}
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="6" class="text-center py-4 text-muted">
+                    <i class="fas fa-book-open fa-2x mb-2"></i>
+                    <p class="mb-0">暂无数据</p>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.page-title {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card-header {
+  border-bottom: none;
+  font-weight: 600;
+}
+
+.table th {
+  border-top: none;
+  font-weight: 600;
+  color: #6c757d;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 1rem 0.75rem;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
+  .table td, .table th {
+    padding: 0.5rem 0.25rem;
+  }
+
+  img.rounded {
+    width: 50px !important;
+    height: 65px !important;
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem;
+  }
+}
+</style>
 
 {% endblock %}
